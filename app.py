@@ -173,7 +173,7 @@ app.index_string = '''
         <meta property="og:title" content="Tracking COVID-19 in Texas">
         <meta property="og:url" content="http://www.covid19intexas.com">
         <meta property="og:type" content="website">
-        <meta property="og:image" content="http://www.covid19intexas.com/image/preview.jpg">
+        <meta property="og:image" content="http://www.el-chammas.com/images/preview.jpg">
         <meta property="og:description" content="Daily updates of cases in Austin and Texas.">
         {%metas%}
         <title>{%title%}</title>
