@@ -131,8 +131,15 @@ fig3=go.Figure(data2, layout=layout2)
 #fig2.add_trace(go.Scatter(x=austincases['Date'][1:], y=y))
 #fig2.update_layout(yaxis_type='log')
 
-app = dash.Dash(__name__, assets_external_path='http://assets/')
+
+
+
+#external_scripts = [{'type':"text/javascript",'src':'https://www.statcounter.com/counter/counter.js'}]
+app = dash.Dash(__name__, assets_external_path='http://assets/')#, external_scripts=external_scripts)
+#app.scripts.append_script({"external_url": ['https://www.statcounter.com/counter/counter.js',
 app.title = 'Tracking COVID-19 cases in Austin and Texas'
+
+
 #app.scripts.config.serve_locally = False
 #app.css.append_css({'external_url':'/base.css'})
 
@@ -151,8 +158,13 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                         config={'scrollZoom':True,'responsive':True})]),
     html.Div([dcc.Graph(figure=fig3,
                         config={'scrollZoom':True,'responsive':True})]),
-                          html.H3(style={'color':colors['text']},children='Data sources:  Texas data obtained from John Hopkins data set (https://github.com/CSSEGISandData).  They are currently changing the format of this data set, and data from March 23 onwards currently is not valid.  Austin data obtained from KUT and Travis County.')
-              ])
+                          html.H3(style={'color':colors['text']},children='Data sources:  Texas data obtained from John Hopkins data set (https://github.com/CSSEGISandData).  They are currently changing the format of this data set, and data from March 23 onwards currently is not valid.  Austin data obtained from KUT and Travis County.'),
+    html.Img(className='statcounter',src='src="https://c.statcounter.com/12224865/0/5c457a33/1/',alt="Updated March 24, 2020")
+
+              ]
+
+
+                      )
 
 
 #This is new
