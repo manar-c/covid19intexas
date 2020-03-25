@@ -158,13 +158,53 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                         config={'scrollZoom':True,'responsive':True})]),
     html.Div([dcc.Graph(figure=fig3,
                         config={'scrollZoom':True,'responsive':True})]),
-                          html.H3(style={'color':colors['text']},children='Data sources:  Texas data obtained from John Hopkins data set (https://github.com/CSSEGISandData).  They are currently changing the format of this data set, and data from March 23 onwards currently is not valid.  Austin data obtained from KUT and Travis County.'),
-    html.Img(className='statcounter',src='src="https://c.statcounter.com/12224865/0/5c457a33/1/',alt="Updated March 24, 2020")
+                          html.H3(style={'color':colors['text']},children='Data sources:  Texas data obtained from John Hopkins data set (https://github.com/CSSEGISandData).  They are currently changing the format of this data set, and data from March 23 onwards currently is not valid.  Austin data obtained from KUT and Travis County.')
+    #html.Img(className='statcounter',src='src="https://c.statcounter.com/12224865/0/5c457a33/1/',alt="Updated March 24, 2020")
 
               ]
 
 
                       )
+
+app.index_string = '''
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta property="og:title" content="Tracking COVID-19 in Texas">
+        <meta property="og:image" content="http://www.covid19intexas.com/image/preview.jpg">
+        <meta property="og:description" content="Daily updates of cases in Austin and Texas.">
+        {%metas%}
+        <title>{%title%}</title>
+        {%favicon%}
+        {%css%}
+    </head>
+    <body>
+        {%app_entry%}
+        <footer>
+            {%config%}
+            {%scripts%}
+            {%renderer%}
+        </footer>
+       <!-- Default Statcounter code for Covid10
+http://www.covid19intexas.com -->
+<script type="text/javascript">
+var sc_project=12224865; 
+var sc_invisible=1; 
+var sc_security="5c457a33"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics
+Made Easy - StatCounter" href="https://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/12224865/0/5c457a33/1/"
+alt="Web Analytics Made Easy -
+StatCounter"></a></div></noscript>
+<!-- End of Statcounter Code -->
+    </body>
+</html>
+'''
 
 
 #This is new
