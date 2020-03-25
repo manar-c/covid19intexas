@@ -81,8 +81,8 @@ layout = go.Layout(
     #height=1000,
     paper_bgcolor=colors['background'],
     plot_bgcolor=colors['plotbg'],
-    font=dict(color=colors['text'],size=20),
-    legend=dict(x=0,y=1,bgcolor=colors['plotbg'])
+    font=dict(color=colors['text'],size=10),
+    legend=dict(x=0,y=1,bgcolor=colors['plotbg'],orientation='h')
     )
 
 fig2=go.Figure(data, layout=layout)
@@ -119,8 +119,8 @@ layout2 = go.Layout(
     #height=500,
     paper_bgcolor=colors['background'],
     plot_bgcolor=colors['plotbg'],
-    font=dict(color=colors['text'],size=20),
-    legend=dict(x=0,y=1,bgcolor=colors['plotbg'])
+    font=dict(color=colors['text'],size=10),
+    legend=dict(x=0,y=1,bgcolor=colors['plotbg'],orientation='h')
     )
 
 fig3=go.Figure(data2, layout=layout2)
