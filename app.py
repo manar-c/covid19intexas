@@ -10,7 +10,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 #John hopkins data: https://github.com/CSSEGISandData/COVID-19
-
+#https://public.tableau.com/profile/christopher.paolini#!/vizhome/COVID-19Dashboard_15850633730350/UnitedStatesCOVID-19CaseTracker
 #url = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv'
 #      https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv'
 
@@ -132,7 +132,7 @@ fig3=go.Figure(data2, layout=layout2)
 #fig2.update_layout(yaxis_type='log')
 
 app = dash.Dash(__name__, assets_external_path='http://assets/')
-app.title = 'COVID19'
+app.title = 'Tracking COVID-19 cases in Austin and Texas'
 #app.scripts.config.serve_locally = False
 #app.css.append_css({'external_url':'/base.css'})
 
