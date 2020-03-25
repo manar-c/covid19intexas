@@ -72,13 +72,13 @@ layout = go.Layout(
         overlaying='y',
         side='right',
         type='log',
-        showgrid=False,ticks='outside',tickvals=[0,10,100]
+        showgrid=False,ticks='outside'
         ),
     xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside'),
     xaxis_title='Date',
-    autosize=True,
+    #autosize=True,
     #width=1000,
-    #height=1000,
+    #height=500,
     paper_bgcolor=colors['background'],
     plot_bgcolor=colors['plotbg'],
     font=dict(color=colors['text'],size=20),
@@ -110,7 +110,7 @@ layout2 = go.Layout(
         overlaying='y',
         side='right',
         type='log',
-        showgrid=False,ticks='outside',automargin=True,tickvals=[10,100,1000]
+        showgrid=False,ticks='outside',automargin=True
         ),
     xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside',automargin=True),
     xaxis_title='Date',
@@ -124,8 +124,6 @@ layout2 = go.Layout(
     )
 
 fig3=go.Figure(data2, layout=layout2)
-fig3.update_yaxes(tick0=20)
-
 
 
 #fig2.update_xaxes(automargin=True)
@@ -154,14 +152,14 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
     html.H1(children='Keeping track of COVID19 in Austin and Texas',
     style={'textAlign':'center',
            'color':colors['text']}),
-                          html.H5(style={'color':colors['text']},children='Austin data updated on 3/24/20.'),
+                          html.H3(style={'color':colors['text']},children='Austin data updated on 3/24/20.'),
                           
     #dcc.Graph(figure=fig1),
     html.Div([dcc.Graph(figure=fig2,
                         config={'scrollZoom':True,'responsive':True})]),
     html.Div([dcc.Graph(figure=fig3,
                         config={'scrollZoom':True,'responsive':True})]),
-                          html.H5(style={'color':colors['text']},children='Data sources:  Texas data obtained from John Hopkins data set (https://github.com/CSSEGISandData).  They are currently changing the format of this data set, and data from March 23 onwards currently is not valid.  Austin data obtained from KUT and Travis County.')
+                          html.H3(style={'color':colors['text']},children='Data sources:  Texas data obtained from John Hopkins data set (https://github.com/CSSEGISandData).  They are currently changing the format of this data set, and data from March 23 onwards currently is not valid.  Austin data obtained from KUT and Travis County.')
     #html.Img(className='statcounter',src='src="https://c.statcounter.com/12224865/0/5c457a33/1/',alt="Updated March 24, 2020")
 
               ]
@@ -169,8 +167,6 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
 
                       )
 
-
-#Create responsive site via https://www.w3schools.com/html/html_responsive.asp
 app.index_string = '''
 <!DOCTYPE html>
 <html>
@@ -180,8 +176,6 @@ app.index_string = '''
         <meta property="og:type" content="website">
         <meta property="og:image" content="http://www.el-chammas.com/images/preview.jpg">
         <meta property="og:description" content="Daily updates of cases in Austin and Texas.">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         {%metas%}
         <title>{%title%}</title>
         {%favicon%}
