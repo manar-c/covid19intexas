@@ -14,18 +14,35 @@ from dash.dependencies import Input, Output
 #url = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv'
 #      https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv'
 
-#globalcases = pd.read_csv(url, error_bad_lines=False)
-globalcases = pd.read_csv('jhdata_20200323.csv')
-texascases = globalcases[globalcases['Province/State']=='Texas'].iloc[0,4:]
+loadnewdata = False
 
-#Find first data for texas
-casestart = texascases > 0
-x = texascases[casestart].index.values
-y = texascases[casestart]
+if loadnewdata:
+    #globalcases = pd.read_csv(url, error_bad_lines=False)
+    globalcases = pd.read_csv('jhdata_20200323.csv')
+    texascases = globalcases[globalcases['Province/State']=='Texas'].iloc[0,4:]
+
+    #Find first data for texas
+    casestart = texascases > 0
+    texascases = texascases[casestart]
+    texascases.to_csv('texascases.csv')
+
+
+texascases = pd.read_csv('texascases.csv')
+x = texascases.iloc[:,0]
+y = texascases.iloc[:,1]
+#x = texascases[casestart].index.values
+#y = texascases[casestart]
+
+#x = texascases.index.values
+#y = texascases
+
+#print(x)
+
+#x = sdfsfdsfs
 
 
 austincases = pd.read_excel('AustinCases.xlsx', sheet_name='Austin')
-print(austincases.head())
+#print(austincases.head())
 
 colors = {
     'background': '#F5F5F5',
@@ -127,6 +144,8 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
     html.H1(children='Keeping track of COVID19 in Austin and Texas',
     style={'textAlign':'center',
            'color':colors['text']}),
+                          html.H3(style={'color':colors['text']},children='Austin data updated on 3/24/20.'),
+                          
     #dcc.Graph(figure=fig1),
     html.Div([dcc.Graph(figure=fig2,
                         config={'scrollZoom':True,'responsive':True})]),
