@@ -52,8 +52,8 @@ colors = {
 
 
 
-trace1 = go.Scatter(x=austincases['Date'], y=austincases['Cumulative Cases'], name="Linear")
-trace2 = go.Scatter(x=austincases['Date'], y=austincases['Cumulative Cases'], yaxis='y2', name="Logarithmic")
+trace1 = go.Scatter(x=austincases['Date'], y=austincases['Cumulative Cases'], name="Linear", mode = 'lines+markers')
+trace2 = go.Scatter(x=austincases['Date'], y=austincases['Cumulative Cases'], yaxis='y2', name="Logarithmic",mode = 'lines+markers')
 
 data = [trace1, trace2]
 layout = go.Layout(
@@ -89,8 +89,8 @@ fig2=go.Figure(data, layout=layout)
 
 
 
-trace1 = go.Scatter(x=x, y=y, name="Linear")
-trace2 = go.Scatter(x=x, y=y, yaxis='y2', name="Logarithmic")
+trace1 = go.Scatter(x=x, y=y, name="Linear",mode = 'lines+markers')
+trace2 = go.Scatter(x=x, y=y, yaxis='y2', name="Logarithmic",mode = 'lines+markers')
 
 data2 = [trace1, trace2]
 layout2 = go.Layout(
@@ -194,7 +194,7 @@ app.index_string = '''
             {%scripts%}
             {%renderer%}
         </footer>
-       <!-- Default Statcounter code for Covid10
+ <!-- Default Statcounter code for Covid10
 http://www.covid19intexas.com -->
 <script type="text/javascript">
 var sc_project=12224865; 
@@ -211,10 +211,29 @@ src="https://c.statcounter.com/12224865/0/5c457a33/1/"
 alt="Web Analytics Made Easy -
 StatCounter"></a></div></noscript>
 <!-- End of Statcounter Code -->
+
+
     </body>
 </html>
 '''
 
+'''       <!-- Default Statcounter code for Covid10
+http://www.covid19intexas.com -->
+<script type="text/javascript">
+var sc_project=12224865; 
+var sc_invisible=1; 
+var sc_security="5c457a33"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics
+Made Easy - StatCounter" href="https://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/12224865/0/5c457a33/1/"
+alt="Web Analytics Made Easy -
+StatCounter"></a></div></noscript>
+<!-- End of Statcounter Code -->'''
 
 #This is new
 server = app.server
