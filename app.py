@@ -154,7 +154,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
     html.H1(children='Keeping track of COVID19 in Austin and Texas',
     style={'textAlign':'center',
            'color':colors['text']}),
-                          html.H5(style={'color':colors['text']},children='Austin data updated on 3/24/20.'),
+                          html.H5(style={'color':colors['text']},children='Austin data updated on 3/25/20.'),
                           
     #dcc.Graph(figure=fig1),
     html.Div([dcc.Graph(figure=fig2,
