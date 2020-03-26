@@ -92,7 +92,7 @@ fig2=go.Figure(data, layout=layout)
 
 
 trace1 = go.Scatter(x=x, y=y, name="Point1-Linear",mode = 'lines+markers')
-trace1A = go.Scatter(x = x, y = y2, name="JHU-Linear", 'lines+markers')
+trace1A = go.Scatter(x = x, y = y2, name="JHU-Linear", mode='lines+markers')
 trace2 = go.Scatter(x=x, y=(y2+y)*0.5, yaxis='y2', name="Average-Logarithmic",mode = 'lines+markers')
 
 data2 = [trace1, trace1A, trace2]
