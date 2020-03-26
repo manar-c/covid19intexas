@@ -3,6 +3,7 @@ import pandas as pd
 import requests
 import io
 import numpy as np
+import math
 
 url = "http://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv"
 url = 'https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv?_ga=2.95840092.1764237867.1585191885-1918575016.1585191885'
@@ -27,8 +28,8 @@ def get_sheet(sheet_url):
         data_sheet = pd.read_csv(file_object)
         return data_sheet
     
-#df = (get_sheet(url))
-df = pd.read_csv('covid_confirmed_usafacts.csv')
+df = (get_sheet(url))
+#df = pd.read_csv('covid_confirmed_usafacts.csv')
 
 #s = requests.get(url).content
 #df = pd.read_csv(url, error_bad_lines=False)
@@ -39,8 +40,10 @@ print(list(df.columns[0:4]))
 def extractdata(texascases):
         txint = np.zeros(len(texascases))
         for idx,tx in enumerate(texascases):
-                txint[idx] = int(tx)
-                casestart =  txint > 0
+                if not math.isnan(tx):
+                        txint[idx] = int(tx)
+                
+        casestart =  txint > 0
 
         print((texascases[casestart]))
 
