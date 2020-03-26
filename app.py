@@ -30,6 +30,8 @@ if loadnewdata:
 texascases = pd.read_csv('texascases.csv')
 x = texascases.iloc[:,0]
 y = texascases.iloc[:,1]
+y1 = texascases.iloc[:,2]
+y2 = texascases.iloc[:,3]
 #x = texascases[casestart].index.values
 #y = texascases[casestart]
 
@@ -89,10 +91,11 @@ fig2=go.Figure(data, layout=layout)
 
 
 
-trace1 = go.Scatter(x=x, y=y, name="Linear",mode = 'lines+markers')
-trace2 = go.Scatter(x=x, y=y, yaxis='y2', name="Logarithmic",mode = 'lines+markers')
+trace1 = go.Scatter(x=x, y=y, name="Point1-Linear",mode = 'lines+markers')
+trace1A = go.Scatter(x = x, y = y2, name="JHU-Linear", 'lines+markers')
+trace2 = go.Scatter(x=x, y=(y2+y)*0.5, yaxis='y2', name="Average-Logarithmic",mode = 'lines+markers')
 
-data2 = [trace1, trace2]
+data2 = [trace1, trace1A, trace2]
 layout2 = go.Layout(
     title={'text':'Total Cases in Texas',
            'x':0.5,'y':0.9,
@@ -161,7 +164,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                         config={'scrollZoom':True,'responsive':True})]),
     html.Div([dcc.Graph(figure=fig3,
                         config={'scrollZoom':True,'responsive':True})]),
-                          html.H5(style={'color':colors['text']},children='Data sources:  Texas data obtained from John Hopkins data set (https://github.com/CSSEGISandData).  They are currently changing the format of this data set, and data from March 23 onwards currently is not valid.  Austin data obtained from KUT and Travis County.')
+                          html.H5(style={'color':colors['text']},children='Data sources:  Texas data obtained from John Hopkins data set (https://github.com/CSSEGISandData) and https://coronavirus.1point3acres.com/. Austin data obtained from John Hopkins and Travis County.')
     #html.Img(className='statcounter',src='src="https://c.statcounter.com/12224865/0/5c457a33/1/',alt="Updated March 24, 2020")
 
               ]
@@ -194,7 +197,7 @@ app.index_string = '''
             {%scripts%}
             {%renderer%}
         </footer>
- <!-- Default Statcounter code for Covid10
+<!-- Default Statcounter code for Covid10
 http://www.covid19intexas.com -->
 <script type="text/javascript">
 var sc_project=12224865; 
