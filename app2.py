@@ -339,7 +339,7 @@ fig3.update_layout(
             
             x=0.04,
             xanchor="left",
-            y=0.9,
+            y=0.85,
             yanchor="top"
             )
         ]
