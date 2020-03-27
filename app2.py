@@ -12,6 +12,7 @@ from dash.dependencies import Input, Output
 #Austin: http://www.austintexas.gov/COVID19
 #Dallas: https://www.dallascounty.org/covid-19/
 #Harris: http://publichealth.harriscountytx.gov/Resources/2019-Novel-Coronavirus/Harris-County-COVID-19-Confirmed-Cases
+#Texas : https://txdshs.maps.arcgis.com/apps/opsdashboard/index.html#/ed483ecd702b4298ab01e8b9cafc8b83
 
 #John hopkins data: https://github.com/CSSEGISandData/COVID-19
 #https://public.tableau.com/profile/christopher.paolini#!/vizhome/COVID-19Dashboard_15850633730350/UnitedStatesCOVID-19CaseTracker
@@ -74,16 +75,16 @@ layout = go.Layout(
         linecolor=colors['text'],
         linewidth=2,
         mirror=True,
-        showgrid=False,ticks='outside'),
+        showgrid=False,ticks='outside',fixedrange=True,automargin=True),
         #type='log'),
     yaxis2=dict(
         title='Log',
         overlaying='y',
         side='right',
         type='log',
-        showgrid=False,ticks='outside',tickvals=[0,10,100]
+        showgrid=False,ticks='outside',tickvals=[0,10,100],fixedrange=True,automargin=True
         ),
-    xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside'),
+    xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside', fixedrange=True,automargin=True),
     xaxis_title='Date',
     autosize=True,
     #width=1000,
@@ -112,16 +113,16 @@ layout_d = go.Layout(
         linecolor=colors['text'],
         linewidth=2,
         mirror=True,
-        showgrid=False,ticks='outside'),
+        showgrid=False,ticks='outside',fixedrange=True,automargin=True),
         #type='log'),
     yaxis2=dict(
         title='Log',
         overlaying='y',
         side='right',
         type='log',
-        showgrid=False,ticks='outside',tickvals=[0,10,100]
+        showgrid=False,ticks='outside',tickvals=[0,10,100],fixedrange=True,automargin=True
         ),
-    xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside'),
+    xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside',fixedrange=True,automargin=True),
     xaxis_title='Date',
     autosize=True,
     #width=1000,
@@ -150,16 +151,16 @@ layout_h = go.Layout(
         linecolor=colors['text'],
         linewidth=2,
         mirror=True,
-        showgrid=False,ticks='outside'),
+        showgrid=False,ticks='outside',fixedrange=True,automargin=True),
         #type='log'),
     yaxis2=dict(
         title='Log',
         overlaying='y',
         side='right',
         type='log',
-        showgrid=False,ticks='outside',tickvals=[0,10,100]
+        showgrid=False,ticks='outside',tickvals=[0,10,100],fixedrange=True,automargin=True
         ),
-    xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside'),
+    xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside',automargin=True,fixedrange=True),
     xaxis_title='Date',
     autosize=True,
     #width=1000,
@@ -189,16 +190,16 @@ layout2 = go.Layout(
         linecolor=colors['text'],
         linewidth=2,
         mirror=True,
-        showgrid=False,ticks='outside',automargin=True),
+        showgrid=False,ticks='outside',automargin=True,fixedrange=True),
         #type='log'),
     yaxis2=dict(
         title='Log',
         overlaying='y',
         side='right',
         type='log',
-        showgrid=False,ticks='outside',automargin=True,tickvals=[10,100,1000]
+        showgrid=False,ticks='outside',automargin=True,tickvals=[10,100,1000],fixedrange=True
         ),
-    xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside',automargin=True),
+    xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside',automargin=True,fixedrange=True),
     xaxis_title='Date',
     #autosize=True,
     #width=1000,
