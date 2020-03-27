@@ -44,7 +44,7 @@ for i in range(maxday0,maxday1):
         if len(result) > 0:
                 results[strbase] = np.ndarray.item(result)
 #                print(np.size(result))
-maxday2 = 25
+maxday2 = 26
 for i in range(maxday1, maxday2):
         strbase = '03-'+str(i+1) + '-2020.csv'
         url = baseurl + strbase
