@@ -9,6 +9,10 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
+#Austin: http://www.austintexas.gov/COVID19
+#Dallas: https://www.dallascounty.org/covid-19/
+#Harris: http://publichealth.harriscountytx.gov/Resources/2019-Novel-Coronavirus/Harris-County-COVID-19-Confirmed-Cases
+
 #John hopkins data: https://github.com/CSSEGISandData/COVID-19
 #https://public.tableau.com/profile/christopher.paolini#!/vizhome/COVID-19Dashboard_15850633730350/UnitedStatesCOVID-19CaseTracker
 #url = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv'
