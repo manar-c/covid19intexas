@@ -61,9 +61,11 @@ colors = {
 
 
 
-#####################AUSTIN
+#####################AUSTIN #Linear
 trace1 = go.Scatter(x=austincases['Date'], y=austincases['Cumulative Cases'], name="Linear", mode = 'lines+markers')
-trace2 = go.Scatter(x=austincases['Date'], y=austincases['Cumulative Cases'], yaxis='y2', name="Logarithmic",mode = 'lines+markers')
+#trace2 = go.Scatter(x=austincases['Date'], y=austincases['Cumulative Cases'], yaxis='y2', name="Logarithmic",mode = 'lines+markers', visible=False)
+trace2 = go.Scatter(x=austincases['Date'], y=austincases['Cumulative Cases'], name="Logarithmic",mode = 'lines+markers', visible=False)
+
 
 data = [trace1, trace2]
 layout = go.Layout(
@@ -75,15 +77,16 @@ layout = go.Layout(
         linecolor=colors['text'],
         linewidth=2,
         mirror=True,
+        #type="linear",
         showgrid=False,ticks='outside',fixedrange=True,automargin=True),
         #type='log'),
-    yaxis2=dict(
-        title='Log',
-        overlaying='y',
-        side='right',
-        type='log',
-        showgrid=False,ticks='outside',tickvals=[0,10,100],fixedrange=True,automargin=True
-        ),
+ #   yaxis2=dict(
+ #       title='Count',
+ #       overlaying='y',
+        #side='right',
+ #       type='log',
+ #       showgrid=False,ticks='outside',tickvals=[0,10,100],fixedrange=True,automargin=True,visible=False
+ #       ),
     xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside', fixedrange=True,automargin=True),
     xaxis_title='Date',
     autosize=True,
@@ -96,12 +99,48 @@ layout = go.Layout(
     )
 
 fig2=go.Figure(data, layout=layout)
+fig2.update_layout(
+    updatemenus=[
+        dict(
+            type="buttons",
+            direction="left",
+            buttons=list([
+                dict(
+                    args=[{'visible':[True, False]},
+                          {'yaxis':{'type':'linear', 'title':'Total', 'ticks':'outside', 'fixedrange':True, 'automargin':True,
+                                    'linewidth':2, 'mirror':True, 'linecolor':colors['text']}}],
+                         # {'yaxis':{'visible':[True, False]}}],
+                    label="linear",
+                    method="update",
+                
+                    ),
+                dict(
+                    args=[{'visible':[False, True]},
+                          {'yaxis':{'type':'log', 'title':'Total', 'tickvals':[0,10,100], 'ticks':'outside', 'fixedrange':True, 'automargin':True,
+                                    'linewidth':2, 'mirror':True, 'linecolor':colors['text']}}],
+                          #{'yaxis':{'visible':[False,True]}}],
+                    label="log",
+                    method="update"
+                    )
+            ]),
+            pad={"r": 10, "t": 10},
+            showactive=True,
+            bgcolor='white',
+            
+            x=0.04,
+            xanchor="left",
+            y=0.95,
+            yanchor="top"
+            )
+        ]
+    )
 
 
 ###############DALLAS
 
 trace1 = go.Scatter(x=dallascases['Date'], y=dallascases['Count'], name="Linear", mode = 'lines+markers')
-trace2 = go.Scatter(x=dallascases['Date'], y=dallascases['Count'], yaxis='y2', name="Logarithmic",mode = 'lines+markers')
+trace2 = go.Scatter(x=dallascases['Date'], y=dallascases['Count'], name="Logarithmic",mode = 'lines+markers', visible=False)
+#trace2 = go.Scatter(x=dallascases['Date'], y=dallascases['Count'], yaxis='y2', name="Logarithmic",mode = 'lines+markers')
 
 data = [trace1, trace2]
 layout_d = go.Layout(
@@ -115,13 +154,13 @@ layout_d = go.Layout(
         mirror=True,
         showgrid=False,ticks='outside',fixedrange=True,automargin=True),
         #type='log'),
-    yaxis2=dict(
-        title='Log',
-        overlaying='y',
-        side='right',
-        type='log',
-        showgrid=False,ticks='outside',tickvals=[0,10,100],fixedrange=True,automargin=True
-        ),
+ #   yaxis2=dict(
+ #       title='Log',
+ #       overlaying='y',
+ #       side='right',
+ #       type='log',
+ #       showgrid=False,ticks='outside',tickvals=[0,10,100],fixedrange=True,automargin=True
+ #       ),
     xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside',fixedrange=True,automargin=True),
     xaxis_title='Date',
     autosize=True,
@@ -134,12 +173,45 @@ layout_d = go.Layout(
     )
 
 fig2d=go.Figure(data, layout=layout_d)
+fig2d.update_layout(
+    updatemenus=[
+        dict(
+            type="buttons",
+            direction="left",
+            buttons=list([
+                dict(
+                    args=[{'visible':[True, False]},
+                          {'yaxis':{'type':'linear', 'title':'Total', 'ticks':'outside', 'fixedrange':True, 'automargin':True,
+                                    'linewidth':2, 'mirror':True, 'linecolor':colors['text']}}],
+                         # {'yaxis':{'visible':[True, False]}}],
+                    label="linear",
+                    method="update",
+                
+                    ),
+                dict(
+                    args=[{'visible':[False, True]},
+                          {'yaxis':{'type':'log', 'title':'Total', 'tickvals':[0,10,100], 'ticks':'outside', 'fixedrange':True, 'automargin':True,
+                                    'linewidth':2, 'mirror':True, 'linecolor':colors['text']}}],
+                          #{'yaxis':{'visible':[False,True]}}],
+                    label="log",
+                    method="update"
+                    )
+            ]),
+            pad={"r": 10, "t": 10},
+            showactive=True,
+            bgcolor='white',
+            
+            x=0.04,
+            xanchor="left",
+            y=0.95,
+            yanchor="top"
+            )
+        ]
+    )
 
 ###############HARRIS
-
-#####################AUSTIN
 trace1 = go.Scatter(x=houstoncases['Date'], y=houstoncases['Count'], name="Linear", mode = 'lines+markers')
-trace2 = go.Scatter(x=houstoncases['Date'], y=houstoncases['Count'], yaxis='y2', name="Logarithmic",mode = 'lines+markers')
+trace2 = go.Scatter(x=houstoncases['Date'], y=houstoncases['Count'], name="Logarithmic",mode = 'lines+markers', visible=False)
 
 data = [trace1, trace2]
 layout_h = go.Layout(
@@ -153,13 +225,7 @@ layout_h = go.Layout(
         mirror=True,
         showgrid=False,ticks='outside',fixedrange=True,automargin=True),
         #type='log'),
-    yaxis2=dict(
-        title='Log',
-        overlaying='y',
-        side='right',
-        type='log',
-        showgrid=False,ticks='outside',tickvals=[0,10,100],fixedrange=True,automargin=True
-        ),
+ 
     xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside',automargin=True,fixedrange=True),
     xaxis_title='Date',
     autosize=True,
@@ -172,12 +238,48 @@ layout_h = go.Layout(
     )
 
 fig2h=go.Figure(data, layout=layout_h)
+fig2h.update_layout(
+    updatemenus=[
+        dict(
+            type="buttons",
+            direction="left",
+            buttons=list([
+                dict(
+                    args=[{'visible':[True, False]},
+                          {'yaxis':{'type':'linear', 'title':'Total', 'ticks':'outside', 'fixedrange':True, 'automargin':True,
+                                    'linewidth':2, 'mirror':True, 'linecolor':colors['text']}}],
+                         # {'yaxis':{'visible':[True, False]}}],
+                    label="linear",
+                    method="update",
+                
+                    ),
+                dict(
+                    args=[{'visible':[False, True]},
+                          {'yaxis':{'type':'log', 'title':'Total', 'tickvals':[0,10,100], 'ticks':'outside', 'fixedrange':True, 'automargin':True,
+                                    'linewidth':2, 'mirror':True, 'linecolor':colors['text']}}],
+                          #{'yaxis':{'visible':[False,True]}}],
+                    label="log",
+                    method="update"
+                    )
+            ]),
+            pad={"r": 10, "t": 10},
+            showactive=True,
+            bgcolor='white',
+            
+            x=0.04,
+            xanchor="left",
+            y=0.95,
+            yanchor="top"
+            )
+        ]
+    )
+
 
 
 
 trace1 = go.Scatter(x=x, y=y, name="Point1-Linear",mode = 'lines+markers')
 trace1A = go.Scatter(x = x, y = y2, name="JHU-Linear", mode='lines+markers')
-trace2 = go.Scatter(x=x, y=(y2+y)*0.5, yaxis='y2', name="Average-Logarithmic",mode = 'lines+markers')
+trace2 = go.Scatter(x=x, y=(y2+y)*0.5, name="Average-Logarithmic",mode = 'lines+markers', visible=False)
 
 data2 = [trace1, trace1A, trace2]
 layout2 = go.Layout(
@@ -192,13 +294,7 @@ layout2 = go.Layout(
         mirror=True,
         showgrid=False,ticks='outside',automargin=True,fixedrange=True),
         #type='log'),
-    yaxis2=dict(
-        title='Log',
-        overlaying='y',
-        side='right',
-        type='log',
-        showgrid=False,ticks='outside',automargin=True,tickvals=[10,100,1000],fixedrange=True
-        ),
+
     xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside',automargin=True,fixedrange=True),
     xaxis_title='Date',
     #autosize=True,
@@ -212,6 +308,42 @@ layout2 = go.Layout(
 
 fig3=go.Figure(data2, layout=layout2)
 fig3.update_yaxes(tick0=20)
+
+fig3.update_layout(
+    updatemenus=[
+        dict(
+            type="buttons",
+            direction="left",
+            buttons=list([
+                dict(
+                    args=[{'visible':[True, True, False]},
+                          {'yaxis':{'type':'linear', 'title':'Total', 'ticks':'outside', 'fixedrange':True, 'automargin':True,
+                                    'linewidth':2, 'mirror':True, 'linecolor':colors['text']}}],
+                         # {'yaxis':{'visible':[True, False]}}],
+                    label="linear",
+                    method="update",
+                
+                    ),
+                dict(
+                    args=[{'visible':[False, False, True]},
+                          {'yaxis':{'type':'log', 'title':'Total', 'tickvals':[0,10,100, 1000], 'ticks':'outside', 'fixedrange':True, 'automargin':True,
+                                    'linewidth':2, 'mirror':True, 'linecolor':colors['text']}}],
+                          #{'yaxis':{'visible':[False,True]}}],
+                    label="log",
+                    method="update"
+                    )
+            ]),
+            pad={"r": 10, "t": 10},
+            showactive=True,
+            bgcolor='white',
+            
+            x=0.04,
+            xanchor="left",
+            y=0.95,
+            yanchor="top"
+            )
+        ]
+    )
 
 
 
@@ -301,23 +433,6 @@ app.index_string = '''
             {%scripts%}
             {%renderer%}
         </footer>
- <!-- Default Statcounter code for Covid10
-http://www.covid19intexas.com -->
-<script type="text/javascript">
-var sc_project=12224865; 
-var sc_invisible=1; 
-var sc_security="5c457a33"; 
-</script>
-<script type="text/javascript"
-src="https://www.statcounter.com/counter/counter.js"
-async></script>
-<noscript><div class="statcounter"><a title="Web Analytics
-Made Easy - StatCounter" href="https://statcounter.com/"
-target="_blank"><img class="statcounter"
-src="https://c.statcounter.com/12224865/0/5c457a33/1/"
-alt="Web Analytics Made Easy -
-StatCounter"></a></div></noscript>
-<!-- End of Statcounter Code -->
 
     </body>
 </html>
