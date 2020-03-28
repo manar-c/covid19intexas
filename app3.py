@@ -79,7 +79,7 @@ lstdate = lstdate.strftime('%m/%d/%y')
 xt = np.arange(len(austincases['Date'])+1)
 yt1 = np.round( np.exp(xt[:6]*0.5)*3)
 #print(yt1)
-yt2 = np.round(np.exp(np.arange(len(xt[6:]))*0.15)*58)
+yt2 = np.round(np.exp(np.arange(len(xt[6:]))*0.143)*58)
 #print(yt2)
 #print(np.append(yt1, yt2))
 yt = np.append(yt1, yt2)
@@ -438,7 +438,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                 html.H1(children='Keeping track of COVID19 in  Texas',
                         style={'textAlign':'center',
                                'color':colors['text']}),
-                html.H5(style={'color':colors['text']},children='Austin data updated on 3/27/20. Texas data updated 3/27/20.'),
+                html.H5(style={'color':colors['text']},children='Austin data updated on 3/28/20. Texas data updated 3/28/20.'),
                 html.Div([
                     html.Div([dcc.Graph(figure=fig3,
                         config={'scrollZoom':True,'responsive':True})], className="eight columns"),
