@@ -24,6 +24,14 @@ from datetime import datetime
 
 loadnewdata = False
 
+
+colors = {
+    'background': '#F5F5F5',
+    'text': '#484848',
+    'plotbg': '#FDFDFD'
+    }
+
+
 if loadnewdata:
     #globalcases = pd.read_csv(url, error_bad_lines=False)
     globalcases = pd.read_csv('jhdata_20200323.csv')
@@ -35,6 +43,45 @@ if loadnewdata:
     texascases.to_csv('texascases.csv')
 
 
+
+
+#First, get growth rate csv
+gr = pd.read_csv('gr_rate.csv')
+grdate = gr['Date']
+grt = (gr['Texas']-1)*100
+gra = (gr['Austin']-1)*100
+grd = (gr['Dallas']-1)*100
+grh = (gr['Harris']-1)*100
+
+
+trace1 = go.Scatter(x = grdate, y = grt, name="Texas", mode="lines+markers")
+trace2 = go.Scatter(x = grdate, y = gra, name="Austin", mode="lines+markers")
+trace3 = go.Scatter(x = grdate, y = grd, name="Dallas", mode="lines+markers")
+trace4 = go.Scatter(x = grdate, y = grh, name="Harris", mode="lines+markers")
+data = [trace1, trace2, trace3, trace4]
+
+layout = go.Layout(
+    title={'text':'Growth rate over time (7 day intervals)',
+           'x':0.5,'y':0.9,
+           'xanchor':'center','yanchor':'top'},
+    yaxis=dict(
+        title='Growth rate [%]',
+        linecolor=colors['text'],
+        linewidth=2,
+        mirror=True,
+        showgrid=False,ticks='outside',fixedrange=True,automargin=True),
+    xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside', fixedrange=True,automargin=True),
+    xaxis_title='Date',
+    autosize=True,
+    paper_bgcolor=colors['background'],
+    plot_bgcolor=colors['plotbg'],
+    font=dict(color=colors['text'],size=10),
+    legend=dict(x=0,y=1,bgcolor=colors['plotbg'],orientation='h')
+    )
+
+fig_gr=go.Figure(data, layout=layout)
+
+
 texascases = pd.read_csv('texascases.csv')
 x = texascases.iloc[:,0]
 y = texascases.iloc[:,1]
@@ -43,24 +90,11 @@ y2 = texascases.iloc[:,3]
 #x = texascases[casestart].index.values
 #y = texascases[casestart]
 
-#x = texascases.index.values
-#y = texascases
-
-#print(x)
-
-#x = sdfsfdsfs
-
 
 austincases = pd.read_excel('AustinCases.xlsx', sheet_name='Austin')
 houstoncases = pd.read_csv('Harris.csv')
 dallascases = pd.read_csv('Dallas.csv')
 #print(austincases.head())
-
-colors = {
-    'background': '#F5F5F5',
-    'text': '#484848',
-    'plotbg': '#FDFDFD'
-    }
 
 
 
@@ -319,7 +353,7 @@ lstdate = lstdate.strftime('%m/%d/%y')
 #print(lstdate)
 xt = np.arange(len(x[3:])+1)
 
-yt = np.round(np.exp(xt*0.26)*3.6) #np.append(yt1, yt2)
+yt = np.round(np.exp(xt*0.278)*3.57) #np.append(yt1, yt2)
 #print(yt)
 newdate = x[3:].copy()
 newdate = newdate.append(pd.Series(lstdate))
@@ -440,6 +474,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                                'color':colors['text']}),
                 html.H5(style={'color':colors['text']},children='Austin data updated on 3/31/20. Texas data updated 3/31/20.'),
                 html.Div([
+                    html.Div(),
                     html.Div([dcc.Graph(figure=fig3,
                         config={'scrollZoom':True,'responsive':True})], className="eight columns"),
                     html.Div([dcc.Graph(figure=fig2,
@@ -447,7 +482,9 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                     html.Div([dcc.Graph(figure=fig2d,
                         config={'scrollZoom':True,'responsive':True})], className="eight columns"),
                     html.Div([dcc.Graph(figure=fig2h,
-                           config={'scrollZoom':True,'responsive':True})], className="eight columns")],
+                                        config={'scrollZoom':True,'responsive':True})], className="eight columns"),
+                    html.Div([dcc.Graph(figure=fig_gr,
+                        config={'scrollZoom':True,'responsive':True})], className="eight columns")],
                          className="row"),
                 html.H5(style={'color':colors['text']},children='Data sources:  Texas data obtained from John Hopkins data set (https://github.com/CSSEGISandData) and https://coronavirus.1point3acres.com/. Austin, Dallas, Harris County data obtained from John Hopkins,  Travis County, and USA Facts (https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/).  Delayed reporting results in slight discrepencies.')
 
@@ -479,7 +516,7 @@ app.index_string = '''
             {%config%}
             {%scripts%}
             {%renderer%}
-        </footer>
+
 <!-- Default Statcounter code for Covid10
 http://www.covid19intexas.com -->
 <script type="text/javascript">
@@ -497,7 +534,6 @@ src="https://c.statcounter.com/12224865/0/5c457a33/1/"
 alt="Web Analytics Made Easy -
 StatCounter"></a></div></noscript>
 <!-- End of Statcounter Code -->
-
 
     </body>
 </html>
