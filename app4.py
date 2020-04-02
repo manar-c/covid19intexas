@@ -516,7 +516,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                                                        'backgroundColor':'lightgrey'},
                              className=spacing),
                     html.Div([html.P(html.B('Harris County')),
-                              html.P('Updated on 4/1/2020'),
+                              html.P('Updated on 4/2/2020'),
                               html.P('Total Cases: '+str(harrisToday)),
                               html.P('New Cases: '+str(harrisNewCasesToday))], style={'textAlign':"center",
                                                        'borderRadius':'4px',
