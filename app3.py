@@ -353,7 +353,7 @@ lstdate = lstdate.strftime('%m/%d/%y')
 #print(lstdate)
 xt = np.arange(len(x[3:])+1)
 
-yt = np.round(np.exp(xt*0.278)*3.57) #np.append(yt1, yt2)
+yt = np.round(np.exp(xt*0.272)*3.57) #np.append(yt1, yt2)
 #print(yt)
 newdate = x[3:].copy()
 newdate = newdate.append(pd.Series(lstdate))
@@ -472,7 +472,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                 html.H1(children='Keeping track of COVID19 in  Texas',
                         style={'textAlign':'center',
                                'color':colors['text']}),
-                html.H5(style={'color':colors['text']},children='Austin data updated on 3/31/20. Texas data updated 3/31/20.'),
+                html.H5(style={'color':colors['text']},children='Austin data updated on 4/1/20. Texas data updated 4/1/20.'),
                 html.Div([
                     html.Div(),
                     html.Div([dcc.Graph(figure=fig3,
