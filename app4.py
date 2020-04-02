@@ -90,7 +90,8 @@ y2 = texascases.iloc[:,3]
 #x = texascases[casestart].index.values
 #y = texascases[casestart]
 
-
+texasToday = int(y[len(texascases)-1])
+texasNewCasesToday = int(np.diff(y)[-1])
 austincases = pd.read_excel('AustinCases.xlsx', sheet_name='Austin')
 houstoncases = pd.read_csv('Harris.csv')
 dallascases = pd.read_csv('Dallas.csv')
@@ -103,6 +104,8 @@ trace1 = go.Scatter(x=austincases['Date'], y=austincases['Cumulative Cases'], na
 #trace2 = go.Scatter(x=austincases['Date'], y=austincases['Cumulative Cases'], yaxis='y2', name="Logarithmic",mode = 'lines+markers', visible=False)
 trace2 = go.Scatter(x=austincases['Date'], y=austincases['Cumulative Cases'], name="Logarithmic",mode = 'lines+markers', visible=False)
 
+austinToday = austincases['Cumulative Cases'][len(austincases)-1]
+#austinTotal = len(austincases)
 
 #ESTIMATE FOR AUSTIN
 lstdate = (austincases['Date'][len(austincases)-1])
@@ -123,8 +126,8 @@ newdate = newdate.append(pd.Series(lstdate))
 trace3 = go.Scatter(x = newdate, y = yt, name='Best Fit+Estimate', visible=False, mode='lines+markers', line={'dash':'dash', 'color':'black'})
 
 #Create trace for new cases
-trace4 = go.Bar(x = austincases['Date'][1:], y=np.diff(yt), name='New Cases', visible=True)
-
+trace4 = go.Bar(x = austincases['Date'][1:], y=np.diff(austincases['Cumulative Cases']), name='New Cases', visible=True)
+austinNewCasesToday = np.diff(austincases['Cumulative Cases'])[-1]
 
 data = [trace1, trace2, trace3, trace4]
 layout = go.Layout(
@@ -203,6 +206,9 @@ trace2 = go.Scatter(x=dallascases['Date'], y=dallascases['Count'], name="Logarit
 #Create trace for new cases
 trace3 = go.Bar(x = dallascases['Date'][1:], y=np.diff(dallascases['Count']), name='New Cases', visible=True)
 
+dallasToday = dallascases['Count'][len(dallascases)-1]
+dallasNewCasesToday = np.diff(dallascases['Count'])[-1]
+
 data = [trace1, trace2, trace3]
 layout_d = go.Layout(
     title={'text':'Total Cases in Dallas, TX',
@@ -274,6 +280,9 @@ fig2d.update_layout(
 trace1 = go.Scatter(x=houstoncases['Date'], y=houstoncases['Count'], name="Linear", mode = 'lines+markers')
 trace2 = go.Scatter(x=houstoncases['Date'], y=houstoncases['Count'], name="Logarithmic",mode = 'lines+markers', visible=False)
 trace3 = go.Bar(x = houstoncases['Date'][1:], y=np.diff(houstoncases['Count']), name='New Cases', visible=True)
+
+harrisToday = houstoncases['Count'][len(houstoncases)-1]
+harrisNewCasesToday = np.diff(houstoncases['Count'])[-1]
 
 data = [trace1, trace2, trace3]
 layout_h = go.Layout(
@@ -470,7 +479,7 @@ app.title = 'Tracking COVID-19 cases in Austin and Texas'
 #app.scripts.config.serve_locally = False
 #app.css.append_css({'external_url':'/base.css'})
 
-
+spacing="two columns"
 
 app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':'center', 'max-width':'1200px',
                              'border':'thick solid black', 'margin-left':'auto', 'margin-right':'auto', 'id':'grid'},
@@ -478,17 +487,50 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                 html.H1(children='Keeping track of COVID19 in  Texas',
                         style={'textAlign':'center',
                                'color':colors['text']}),
-                html.H5(style={'color':colors['text']},children='Austin data updated on 4/1/20. Texas data updated 4/1/20.'),
+                #html.H5(style={'color':colors['text']},children='Austin data updated on 4/1/20. Texas data updated 4/1/20.'),
                 html.Div([
                     html.Div(),
+                    html.Div([html.P(html.B('Texas')),
+                              html.P('Updated on 4/1/2020'),
+                              html.P('Total Cases: '+str(texasToday)),
+                              html.P('New Cases: '+str(texasNewCasesToday))], style={'textAlign':"center",
+                                                       'borderRadius':'4px',
+                                                                                     'margin':'4px', 'margin-right':'10px',
+                                                                                     
+                                                       'backgroundColor':'lightgrey'},
+                             className=spacing),
+                    html.Div([html.P(html.B('Travis County')),
+                              html.P('Updated on 4/1/2020'),
+                              html.P('Total Cases: '+str(austinToday)),
+                              html.P('New Cases: '+str(austinNewCasesToday))], style={'textAlign':"center",
+                                                       'borderRadius':'4px',
+                                                       'margin':'4px',
+                                                       'backgroundColor':'lightgrey'},
+                             className=spacing),
+                    html.Div([html.P(html.B('Dallas County')),
+                              html.P('Updated on 4/1/2020'),
+                              html.P('Total Cases: '+str(dallasToday)),
+                              html.P('New Cases: '+str(dallasNewCasesToday))], style={'textAlign':"center",
+                                                       'borderRadius':'4px',
+                                                       'margin':'4px',
+                                                       'backgroundColor':'lightgrey'},
+                             className=spacing),
+                    html.Div([html.P(html.B('Harris County')),
+                              html.P('Updated on 4/1/2020'),
+                              html.P('Total Cases: '+str(harrisToday)),
+                              html.P('New Cases: '+str(harrisNewCasesToday))], style={'textAlign':"center",
+                                                       'borderRadius':'4px',
+                                                       'margin':'2px',
+                                                       'backgroundColor':'lightgrey'},
+                             className=spacing),
                     html.Div([dcc.Graph(figure=fig3,
-                        config={'scrollZoom':True,'responsive':True})], className="eight columns"),
+                        config={'scrollZoom':True,'responsive':True})], className="nine columns"),
                     html.Div([dcc.Graph(figure=fig2,
-                        config={'scrollZoom':True,'responsive':True})], className="eight columns"),
+                        config={'scrollZoom':True,'responsive':True})], className="nine columns"),
                     html.Div([dcc.Graph(figure=fig2d,
-                        config={'scrollZoom':True,'responsive':True})], className="eight columns"),
+                        config={'scrollZoom':True,'responsive':True})], className="nine columns"),
                     html.Div([dcc.Graph(figure=fig2h,
-                                        config={'scrollZoom':True,'responsive':True})], className="eight columns"),
+                                        config={'scrollZoom':True,'responsive':True})], className="nine columns"),
                     html.Div([dcc.Graph(figure=fig_gr,
                         config={'scrollZoom':True,'responsive':True})], className="eight columns")],
                          className="row"),
