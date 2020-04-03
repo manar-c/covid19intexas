@@ -53,9 +53,6 @@
   .container {
     width: 100%;
     padding: 0; }
-  /* Added by Manar on 4/3/2020 */
-  .two.columns {width: 35%;}
-     
 }
 
 /* For devices larger than 550px */
@@ -64,7 +61,7 @@
     width: 80%; }
   .column,
   .columns {
-    margin-left: 0; }
+    margin-left: 4%; }
   .column:first-child,
   .columns:first-child {
     margin-left: 0; }
@@ -355,7 +352,7 @@ figure,
 table,
 form {
   margin-bottom: 0rem; }
-p {margin-bottom: 0rem;},
+p,
 ul,
 ol {
   margin-bottom: 0.75rem; }

@@ -28,7 +28,9 @@ loadnewdata = False
 colors = {
     'background': '#F5F5F5',
     'text': '#484848',
-    'plotbg': '#FDFDFD'
+    'plotbg': '#FDFDFD',
+    'up': 'red',
+    'down': 'green'
     }
 
 
@@ -92,6 +94,11 @@ y2 = texascases.iloc[:,3]
 
 texasToday = int(y[len(texascases)-1])
 texasNewCasesToday = int(np.diff(y)[-1])
+texasNewCasesYesterday = int(np.diff(y)[-2])
+if texasNewCasesToday > texasNewCasesYesterday:
+    texasincrease = colors['up']
+else:
+    texasincrease = colors['down']
 austincases = pd.read_excel('AustinCases.xlsx', sheet_name='Austin')
 houstoncases = pd.read_csv('Harris.csv')
 dallascases = pd.read_csv('Dallas.csv')
@@ -128,6 +135,11 @@ trace3 = go.Scatter(x = newdate, y = yt, name='Best Fit+Estimate', visible=False
 #Create trace for new cases
 trace4 = go.Bar(x = austincases['Date'][1:], y=np.diff(austincases['Cumulative Cases']), name='New Cases', visible=True)
 austinNewCasesToday = np.diff(austincases['Cumulative Cases'])[-1]
+austinNewCasesYesterday = np.diff(austincases['Cumulative Cases'])[-1]
+if austinNewCasesToday > austinNewCasesYesterday:
+    austinincrease = colors['up']
+else:
+    austinincrease = colors['down']
 
 data = [trace1, trace2, trace3, trace4]
 layout = go.Layout(
@@ -178,7 +190,7 @@ fig2.update_layout(
                     ),
                 dict(
                     args=[{'visible':[False, True, True, False]},
-                          {'yaxis':{'type':'log', 'title':'Total', 'tickvals':[0,10,100], 'ticks':'outside', 'fixedrange':True, 'automargin':True,
+                          {'yaxis':{'type':'log', 'title':'Total', 'tickvals':[0,10,100, 1000], 'ticks':'outside', 'fixedrange':True, 'automargin':True,
                                     'linewidth':2, 'mirror':True, 'linecolor':colors['text']}}],
                           #{'yaxis':{'visible':[False,True]}}],
                     label="log",
@@ -208,6 +220,10 @@ trace3 = go.Bar(x = dallascases['Date'][1:], y=np.diff(dallascases['Count']), na
 
 dallasToday = dallascases['Count'][len(dallascases)-1]
 dallasNewCasesToday = np.diff(dallascases['Count'])[-1]
+dallasNewCasesYesterday = np.diff(dallascases['Count'])[-2]
+dallasincrease = colors['down']
+if dallasNewCasesToday > dallasNewCasesYesterday:
+    dallasincrease = colors['up']
 
 data = [trace1, trace2, trace3]
 layout_d = go.Layout(
@@ -257,7 +273,7 @@ fig2d.update_layout(
                     ),
                 dict(
                     args=[{'visible':[False, True, False]},
-                          {'yaxis':{'type':'log', 'title':'Total', 'tickvals':[0,10,100], 'ticks':'outside', 'fixedrange':True, 'automargin':True,
+                          {'yaxis':{'type':'log', 'title':'Total', 'tickvals':[0,10,100, 1000], 'ticks':'outside', 'fixedrange':True, 'automargin':True,
                                     'linewidth':2, 'mirror':True, 'linecolor':colors['text']}}],
                           #{'yaxis':{'visible':[False,True]}}],
                     label="log",
@@ -283,6 +299,11 @@ trace3 = go.Bar(x = houstoncases['Date'][1:], y=np.diff(houstoncases['Count']), 
 
 harrisToday = houstoncases['Count'][len(houstoncases)-1]
 harrisNewCasesToday = np.diff(houstoncases['Count'])[-1]
+harrisNewCasesYesterday = np.diff(dallascases['Count'])[-2]
+harrisincrease = colors['down']
+if harrisNewCasesToday > harrisNewCasesYesterday:
+    harrisincrease = colors['up']
+
 
 data = [trace1, trace2, trace3]
 layout_h = go.Layout(
@@ -326,7 +347,7 @@ fig2h.update_layout(
                     ),
                 dict(
                     args=[{'visible':[False, True, False]},
-                          {'yaxis':{'type':'log', 'title':'Total', 'tickvals':[0,10,100], 'ticks':'outside', 'fixedrange':True, 'automargin':True,
+                          {'yaxis':{'type':'log', 'title':'Total', 'tickvals':[0,10,100, 1000], 'ticks':'outside', 'fixedrange':True, 'automargin':True,
                                     'linewidth':2, 'mirror':True, 'linecolor':colors['text']}}],
                           #{'yaxis':{'visible':[False,True]}}],
                     label="log",
@@ -422,7 +443,7 @@ fig3.update_layout(
                     ),
                 dict(
                     args=[{'visible':[False, False, True, True, False]},
-                          {'yaxis':{'type':'log', 'title':'Total', 'tickvals':[0,10,100, 1000], 'ticks':'outside', 'fixedrange':True, 'automargin':True,
+                          {'yaxis':{'type':'log', 'title':'Total', 'tickvals':[0,10,100, 1000, 10000], 'ticks':'outside', 'fixedrange':True, 'automargin':True,
                                     'linewidth':2, 'mirror':True, 'linecolor':colors['text']}}],
                           #{'yaxis':{'visible':[False,True]}}],
                     label="log",
@@ -493,33 +514,39 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                     html.Div([html.P(html.B('Texas')),
                               html.P('Updated on 4/2/2020'),
                               html.P('Total Cases: '+str(texasToday)),
-                              html.P('New Cases: '+str(texasNewCasesToday))], style={'textAlign':"center",
-                                                       'borderRadius':'4px',
-                                                                                     'margin':'4px', 'margin-right':'10px',
+                              html.P(['New Cases: ',html.Span(str(texasNewCasesToday), style={'color':texasincrease})])], style={'textAlign':"center",
+                                                       'borderRadius':'4px','border':'solid darkgrey',
+                                                                                     'margin':'4px',
                                                                                      
                                                        'backgroundColor':'lightgrey'},
                              className=spacing),
                     html.Div([html.P(html.B('Travis County')),
                               html.P('Updated on 4/2/2020'),
                               html.P('Total Cases: '+str(austinToday)),
-                              html.P('New Cases: '+str(austinNewCasesToday))], style={'textAlign':"center",
+                              html.P(['New Cases: ',html.Span(str(austinNewCasesToday), style={'color':austinincrease})])],
+                             style={'textAlign':"center",
                                                        'borderRadius':'4px',
+                                                                                      'border':'solid darkgrey',
                                                        'margin':'4px',
                                                        'backgroundColor':'lightgrey'},
                              className=spacing),
                     html.Div([html.P(html.B('Dallas County')),
                               html.P('Updated on 4/2/2020'),
                               html.P('Total Cases: '+str(dallasToday)),
-                              html.P('New Cases: '+str(dallasNewCasesToday))], style={'textAlign':"center",
-                                                       'borderRadius':'4px',
+                               html.P(['New Cases: ',html.Span(str(dallasNewCasesToday), style={'color':dallasincrease})])],
+                    
+                    style={'textAlign':"center",
+                                                       'borderRadius':'4px','border':'solid darkgrey',
                                                        'margin':'4px',
                                                        'backgroundColor':'lightgrey'},
                              className=spacing),
                     html.Div([html.P(html.B('Harris County')),
                               html.P('Updated on 4/2/2020'),
                               html.P('Total Cases: '+str(harrisToday)),
-                              html.P('New Cases: '+str(harrisNewCasesToday))], style={'textAlign':"center",
-                                                       'borderRadius':'4px',
+                               html.P(['New Cases: ',html.Span(str(harrisNewCasesToday), style={'color':harrisincrease})])],
+                         
+                         style={'textAlign':"center",
+                                                       'borderRadius':'4px','border':'solid darkgrey',
                                                        'margin':'2px',
                                                        'backgroundColor':'lightgrey'},
                              className=spacing),
@@ -532,7 +559,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                     html.Div([dcc.Graph(figure=fig2h,
                                         config={'scrollZoom':True,'responsive':True})], className="nine columns"),
                     html.Div([dcc.Graph(figure=fig_gr,
-                        config={'scrollZoom':True,'responsive':True})], className="eight columns")],
+                        config={'scrollZoom':True,'responsive':True})], className="nine columns")],
                          className="row"),
                 html.H5(style={'color':colors['text']},children='Data sources:  Texas data obtained from John Hopkins data set (https://github.com/CSSEGISandData) and https://coronavirus.1point3acres.com/. Austin, Dallas, Harris County data obtained from John Hopkins,  Travis County, and USA Facts (https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/).  Delayed reporting results in slight discrepencies.')
 
@@ -580,7 +607,7 @@ target="_blank"><img class="statcounter"
 src="https://c.statcounter.com/12224865/0/5c457a33/1/"
 alt="Web Analytics Made Easy -
 StatCounter"></a></div></noscript>
-<!-- End of Statcounter Code -->
+<!-- End of Statcounter Code --
 
     </body>
 </html>
