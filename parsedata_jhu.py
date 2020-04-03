@@ -52,7 +52,7 @@ for i in range(maxday1, maxday2):
         df = pd.read_csv(url)
         result = df[df['Province_State'] == 'Texas'].Confirmed.sum(axis=0)
         results[strbase] = result
-maxday2 = 1
+maxday2 = 2
 for i in range(0, maxday2):
         strbase = '04-0'+str(i+1) + '-2020.csv'
         url = baseurl + strbase
