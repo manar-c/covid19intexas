@@ -299,7 +299,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                                                        'backgroundColor':'lightgrey'},
                              className=spacing),
                     html.Div([html.P(html.B('Dallas County')),
-                              html.P('Updated: 4/3/2020'),
+                              html.P('Updated: 4/4/2020'),
                               html.P('Total: '+str(dallasToday)),
                                html.P(['New: ',html.Span(str(dallasNewCasesToday), style={'color':dallasincrease})])],
                     
