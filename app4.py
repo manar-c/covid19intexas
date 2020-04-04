@@ -389,7 +389,7 @@ lstdate = lstdate.strftime('%m/%d/%y')
 #print(lstdate)
 xt = np.arange(len(x[3:])+1)
 
-yt = np.round(np.exp(xt*0.272)*3.57) #np.append(yt1, yt2)
+yt = np.round(np.exp(xt*0.268)*3.57) #np.append(yt1, yt2)
 #print(yt)
 newdate = x[3:].copy()
 newdate = newdate.append(pd.Series(lstdate))

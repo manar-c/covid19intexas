@@ -53,10 +53,13 @@ def extractdata(texascases):
 #Use -1 to remove last day
 #Sum over all texas counties
 austincases = df[df['county'] == 'Travis']#.iloc[:,4:].sum(axis=0)
-print('TOTAL TEXAS')
+print('TOTAL Austin')
 print(austincases)
 harriscases = df[df['county'] == 'Dallas']
 print(harriscases)
+harriscases = df[df['county'] == 'Harris']
+print(harriscases)
+
 x = sdfsdf
 extractdata(texascases)
 texascases = df[df['County Name'] == 'Travis County'].iloc[0,4:]
