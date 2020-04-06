@@ -28,20 +28,23 @@ def createLayout(title, xlabel, ylabel):
     layout = go.Layout(
         title={'text':title,
            'x':0.5,'y':0.9,
-           'xanchor':'center','yanchor':'top'},
+               'xanchor':'center','yanchor':'top'
+            },
         yaxis=dict(
             title=ylabel,
             linecolor=colors['text'],
             linewidth=2,
             mirror=True,
-            showgrid=False,ticks='outside',fixedrange=True,automargin=True),
+            showgrid=False,ticks='outside',fixedrange=True,automargin=False,
+            title_standoff=200,
+            constrain="domain"),
         xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside', fixedrange=True,automargin=True),
         xaxis_title=xlabel,
         autosize=True,
         paper_bgcolor=colors['background'],
         plot_bgcolor=colors['plotbg'],
-        font=dict(color=colors['text'],size=10),
-        legend=dict(x=0,y=1,bgcolor=colors['plotbg'],orientation='h')
+        font=dict(color=colors['text'],size=14, family='Sans Serif'),
+        legend=dict(x=0.02,y=0.85,bgcolor=colors['plotbg'],orientation='v'),
     )
     return layout
 
@@ -57,9 +60,10 @@ def layoutUpdate(fig, pattern1, pattern2, logticks):
                     args=[{'visible':pattern1},
                           {'yaxis':{'type':'linear', 'title':'Total', 'ticks':'outside', 'fixedrange':True, 'automargin':True,
                                     'linewidth':2, 'mirror':True, 'linecolor':colors['text']}}],
-                         # {'yaxis':{'visible':[True, False]}}],
+                    
                     label="linear",
                     method="update",
+                
                 
                     ),
                 dict(
@@ -75,10 +79,10 @@ def layoutUpdate(fig, pattern1, pattern2, logticks):
             showactive=True,
             bgcolor='white',
             
-            x=0.04,
-            xanchor="left",
-            y=0.95,
-            yanchor="top"
+            x=0.02,
+            xanchor="auto",
+            y=1,
+            yanchor="auto"
             )
         ]
     )
@@ -359,6 +363,7 @@ app.index_string = '''
             {%config%}
             {%scripts%}
             {%renderer%}
+
  <!-- Default Statcounter code for Covid10
 http://www.covid19intexas.com -->
 <script type="text/javascript">
