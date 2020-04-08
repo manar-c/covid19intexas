@@ -162,26 +162,7 @@ fig_gr=go.Figure(data_gr, layout=layout_gr)
 trace1 = go.Scatter(x=austincases['Date'], y=austincases['Cumulative Cases'], name="Linear", mode = 'lines+markers')
 trace2 = go.Scatter(x=austincases['Date'], y=austincases['Cumulative Cases'], name="Logarithmic",mode = 'lines+markers', visible=False)
 
-austinToday = austincases['Cumulative Cases'][len(austincases)-1]
-
-
-#ESTIMATE FOR AUSTIN
-lstdate = (austincases['Date'][len(austincases)-1])
-lstdate = datetime.strptime(lstdate, '%m/%d/%y')
-lstdate += dt.timedelta(days=1)
-lstdate = lstdate.strftime('%m/%d/%y')
-#print(lstdate)
-xt = np.arange(len(austincases['Date'])+1)
-yt1 = np.round( np.exp(xt[:6]*0.5)*3)
-#print(yt1)
-yt2 = np.round(np.exp(np.arange(len(xt[6:]))*0.140)*55)
-#print(yt2)
-#print(np.append(yt1, yt2))
-yt = np.append(yt1, yt2)
-newdate = (austincases['Date'].copy())
-newdate = newdate.append(pd.Series(lstdate))
-
-newdate, yt = getBestFit(austincases, [0, 6], [3.2, 56], [0.5, 0.145])
+newdate, yt = getBestFit(austincases, [0, 6], [3.2, 57], [0.5, 0.128])
 
 trace3 = go.Scatter(x = newdate, y = yt, name='Best Fit+Estimate', visible=False, mode='lines+markers', line={'dash':'dash', 'color':'black'})
 #Create trace for new cases
@@ -203,7 +184,7 @@ trace2 = go.Scatter(x=dallascases['Date'], y=dallascases['Count'], name="Logarit
 #Create trace for new cases
 trace3 = go.Bar(x = dallascases['Date'][1:], y=np.diff(dallascases['Count']), name='New Cases', visible=True)
 
-newdate, yt = getBestFit(dallascases, [0, 15], [4, 247], [0.27, 0.145])
+newdate, yt = getBestFit(dallascases, [0, 16], [4, 290], [0.27, 0.125])
 trace4 = go.Scatter(x = newdate, y = yt, name='Best Fit+Estimate', visible=False, mode='lines+markers', line={'dash':'dash', 'color':'black'})
 
 dallasToday, dallasNewCasesToday, dallasincrease = getSummary(dallascases['Count'])
@@ -244,7 +225,7 @@ trace1A = go.Scatter(x = x, y = y2, name="JHU-Linear", mode='lines+markers')
 trace2 = go.Scatter(x=x, y=(y2+y)*0.5, name="Average-Logarithmic",mode = 'lines+markers', visible=False)
 
 trace4 = go.Bar(x = x[1:], y=np.diff(y), name='New Cases', visible=True)
-newdate, yt = getBestFit(texascases[3:], [0], [4.57], [0.25])
+newdate, yt = getBestFit(texascases[3:], [0, 24], [4.57, 2900], [0.27, 0.115])
 trace3 = go.Scatter(x = newdate, y = yt, name='Best Fit+Estimate', visible=False, mode='lines+markers', line={'dash':'dash', 'color':'black'})
 
 
@@ -363,8 +344,7 @@ app.index_string = '''
             {%config%}
             {%scripts%}
             {%renderer%}
-
- <!-- Default Statcounter code for Covid10
+<!-- Default Statcounter code for Covid10
 http://www.covid19intexas.com -->
 <script type="text/javascript">
 var sc_project=12224865; 
