@@ -274,7 +274,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                                                        'backgroundColor':'lightgrey'},
                              className=spacing),
                     html.Div([html.P(html.B('Travis County')),
-                              html.P('Updated: 4/13/2020'),
+                              html.P('Updated: 4/14/2020'),
                               html.P('Total: '+str(austinToday)),
                               html.P(['New: ',html.Span(str(austinNewCasesToday), style={'color':austinincrease})])],
                              style={'textAlign':"center",
