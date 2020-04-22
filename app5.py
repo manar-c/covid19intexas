@@ -265,7 +265,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                 html.Div([
                     html.Div(),
                     html.Div([html.P(html.B('Texas')),
-                              html.P('Updated: 4/20/2020'),
+                              html.P('Updated: 4/21/2020'),
                               html.P('Total: '+str(texasToday)),
                               html.P(['New: ',html.Span(str(texasNewCasesToday), style={'color':texasincrease})])], style={'textAlign':"center",
                                                        'borderRadius':'4px','border':'solid darkgrey',
@@ -284,7 +284,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                                                        'backgroundColor':'lightgrey'},
                              className=spacing),
                     html.Div([html.P(html.B('Dallas County')),
-                              html.P('Updated: 4/20/2020'),
+                              html.P('Updated: 4/21/2020'),
                               html.P('Total: '+str(dallasToday)),
                                html.P(['New: ',html.Span(str(dallasNewCasesToday), style={'color':dallasincrease})])],
                     
