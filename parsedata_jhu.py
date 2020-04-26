@@ -52,7 +52,7 @@ for i in range(maxday1, maxday2):
         df = pd.read_csv(url)
         result = df[df['Province_State'] == 'Texas'].Confirmed.sum(axis=0)
         results[strbase] = result
-maxday2 = 24
+maxday2 = 25
 for i in range(0, maxday2):
         strbase = '04-'
         if i+1 < 10:
