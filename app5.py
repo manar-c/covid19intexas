@@ -142,7 +142,7 @@ austincases = pd.read_excel('AustinCases.xlsx', sheet_name='Austin')
 houstoncases = pd.read_csv('Harris.csv')
 dallascases = pd.read_csv('Dallas.csv')
 
-#Plot growth rate
+###############Plot growth rate
 grdate = gr['Date']
 grt = (gr['Texas']-1)*100
 gra = (gr['Austin']-1)*100
@@ -156,6 +156,10 @@ trace4 = go.Scatter(x = grdate, y = grh, name="Harris", mode="lines+markers")
 data_gr = [trace1, trace2, trace3, trace4]
 layout_gr = createLayout('Growth rate (7 day intervals)', 'Date', 'Growth rate [%]')
 fig_gr=go.Figure(data_gr, layout=layout_gr)
+
+##############R0 calculation
+#x_a = austincases['Date'][1:]
+#new_a = np.diff(austincases['Cumulative Cases'])
 
 
 #####################AUSTIN 
