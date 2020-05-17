@@ -152,7 +152,7 @@ xa = x[xaustin]
 getR0(x, y)
 #plt.plot(np.diff(y))
 
-x = sdfsfd
+#x = sdfsfd
 
 data = pd.DataFrame()
 data['Date'] = xt

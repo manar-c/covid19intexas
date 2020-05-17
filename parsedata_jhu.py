@@ -68,7 +68,7 @@ for i in range(0, maxday2):
         results[strbase] = result
 
 
-maxday2 = 9
+maxday2 = 16
 for i in range(0, maxday2):
         strbase = '05-'
         if i+1 < 10:
