@@ -16,7 +16,7 @@ from datetime import datetime
 #Dallas: https://www.dallascounty.org/covid-19/
 #Harris: http://publichealth.harriscountytx.gov/Resources/2019-Novel-Coronavirus/Harris-County-COVID-19-Confirmed-Cases
 #Texas : https://txdshs.maps.arcgis.com/apps/opsdashboard/index.html#/ed483ecd702b4298ab01e8b9cafc8b83
-
+#Texas: https://txdshs.maps.arcgis.com/apps/opsdashboard/index.html#/ed483ecd702b4298ab01e8b9cafc8b83
 #John hopkins data: https://github.com/CSSEGISandData/COVID-19
 #https://public.tableau.com/profile/christopher.paolini#!/vizhome/COVID-19Dashboard_15850633730350/UnitedStatesCOVID-19CaseTracker
 #url = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv'
@@ -269,7 +269,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                 html.Div([
                     html.Div(),
                     html.Div([html.P(html.B('Texas')),
-                              html.P('Updated: 6/22/2020'),
+                              html.P('Updated: 6/23/2020'),
                               html.P('Total: '+str(texasToday)),
                               html.P(['New: ',html.Span(str(texasNewCasesToday), style={'color':texasincrease})])], style={'textAlign':"center",
                                                        'borderRadius':'4px','border':'solid darkgrey',
@@ -278,7 +278,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                                                        'backgroundColor':'lightgrey'},
                              className=spacing),
                     html.Div([html.P(html.B('Travis County')),
-                              html.P('Updated: 6/22/2020'),
+                              html.P('Updated: 6/23/2020'),
                               html.P('Total: '+str(austinToday)),
                               html.P(['New: ',html.Span(str(austinNewCasesToday), style={'color':austinincrease})])],
                              style={'textAlign':"center",
@@ -288,7 +288,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                                                        'backgroundColor':'lightgrey'},
                              className=spacing),
                     html.Div([html.P(html.B('Dallas County')),
-                              html.P('Updated: 6/22/2020'),
+                              html.P('Updated: 6/23/2020'),
                               html.P('Total: '+str(dallasToday)),
                                html.P(['New: ',html.Span(str(dallasNewCasesToday), style={'color':dallasincrease})])],
                     
@@ -298,7 +298,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                                                        'backgroundColor':'lightgrey'},
                              className=spacing),
                     html.Div([html.P(html.B('Harris County')),
-                              html.P('Updated: 6/22/2020'),
+                              html.P('Updated: 6/23/2020'),
                               html.P('Total: '+str(harrisToday)),
                                html.P(['New: ',html.Span(str(harrisNewCasesToday), style={'color':harrisincrease})])],
                          
