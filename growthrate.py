@@ -64,6 +64,7 @@ def getR0(xt, y):
     print(newcases)
     
     log_new = np.log(newcases)
+    
     print(log_new)
     #x = sdfsdf
     mv_days_n0 = 7
@@ -85,11 +86,12 @@ def getR0(xt, y):
         #Do a best fit on this
         #ln(n(t)) = ln(n(0)) + K*t
         #print(t)
-        #print(ln_n0)
+        print(ln_nt)
+        print(ln_n0)
         p = np.polyfit(np.array(t), np.array(ln_nt)-np.array(ln_n0), 1)
         print(p[0])
         print('R0 = {}'.format(np.exp(p[0]*1)))
-        r0.append(np.exp(p[0]))
+        r0.append(np.exp(p[0]*1))
     plt.figure()
     plt.plot(np.array(r0))
     plt.show()
@@ -149,6 +151,9 @@ x = x[isnan]
 [xaustin, graustin] = getGrowthRate(np.arange(len(x)), y)
 xa = x[xaustin]
 
+print(x)
+print(y)
+#x - sdfsfd
 getR0(x, y)
 #plt.plot(np.diff(y))
 
