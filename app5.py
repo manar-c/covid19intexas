@@ -166,7 +166,7 @@ fig_gr=go.Figure(data_gr, layout=layout_gr)
 trace1 = go.Scatter(x=austincases['Date'], y=austincases['Cumulative Cases'], name="Linear", mode = 'lines+markers')
 trace2 = go.Scatter(x=austincases['Date'], y=austincases['Cumulative Cases'], name="Logarithmic",mode = 'lines+markers', visible=False)
 
-newdate, yt = getBestFit(austincases, [0, 6, 24], [3.2, 57, 554], [0.5, 0.128, 0.06])
+newdate, yt = getBestFit(austincases, [0, 6, 24, 40], [3.2, 57, 554, 1363], [0.5, 0.128, 0.06, 0.028])
 
 trace3 = go.Scatter(x = newdate, y = yt, name='Best Fit+Estimate', visible=False, mode='lines+markers', line={'dash':'dash', 'color':'black'})
 #Create trace for new cases
@@ -188,7 +188,7 @@ trace2 = go.Scatter(x=dallascases['Date'], y=dallascases['Count'], name="Logarit
 #Create trace for new cases
 trace3 = go.Bar(x = dallascases['Date'][1:], y=np.diff(dallascases['Count']), name='New Cases', visible=True)
 
-newdate, yt = getBestFit(dallascases, [0, 16, 25], [4, 290, 1050], [0.27, 0.125, 0.05])
+newdate, yt = getBestFit(dallascases, [0, 16, 25, 50], [4, 290, 1050, 3700], [0.27, 0.125, 0.05, 0.03])
 trace4 = go.Scatter(x = newdate, y = yt, name='Best Fit+Estimate', visible=False, mode='lines+markers', line={'dash':'dash', 'color':'black'})
 
 dallasToday, dallasNewCasesToday, dallasincrease = getSummary(dallascases['Count'])
@@ -204,7 +204,7 @@ trace1 = go.Scatter(x=houstoncases['Date'], y=houstoncases['Count'], name="Linea
 trace2 = go.Scatter(x=houstoncases['Date'], y=houstoncases['Count'], name="Logarithmic",mode = 'lines+markers', visible=False)
 trace3 = go.Bar(x = houstoncases['Date'][1:], y=np.diff(houstoncases['Count']), name='New Cases', visible=True)
 
-newdate, yt = getBestFit(houstoncases, [0, 35], [3, 3127], [0.2, 0.041])
+newdate, yt = getBestFit(houstoncases, [0, 35, 50], [3, 3127, 5482], [0.2, 0.041, 0.028])
 trace4 = go.Scatter(x = newdate, y = yt, name='Best Fit+Estimate', visible=False, mode='lines+markers', line={'dash':'dash', 'color':'black'})
 
 harrisToday, harrisNewCasesToday, harrisincrease = getSummary(houstoncases['Count'])
@@ -226,10 +226,11 @@ y2 = texascases.iloc[:,3] #JHU
 texasToday, texasNewCasesToday, texasincrease = getSummary(y)
 trace1 = go.Scatter(x=x, y=y, name="Point1-Linear",mode = 'lines+markers')
 trace1A = go.Scatter(x = x, y = y2, name="JHU-Linear", mode='lines+markers')
-trace2 = go.Scatter(x=x, y=(y2+y)*0.5, name="Average-Logarithmic",mode = 'lines+markers', visible=False)
+#trace2 = go.Scatter(x=x, y=(y2+y)*0.5, name="Average-Logarithmic",mode = 'lines+markers', visible=False)
+trace2 = go.Scatter(x=x, y=(2*y)*0.5, name="Average-Logarithmic",mode = 'lines+markers', visible=False)
 
 trace4 = go.Bar(x = x[1:], y=np.diff(y), name='New Cases', visible=True)
-newdate, yt = getBestFit(texascases[3:], [0, 24, 37], [4.57, 2900, 12400], [0.27, 0.115, 0.0535])
+newdate, yt = getBestFit(texascases[3:], [0, 24, 37, 43], [4.57, 2900, 12400, 18000], [0.27, 0.115, 0.0535, 0.03])
 trace3 = go.Scatter(x = newdate, y = yt, name='Best Fit+Estimate', visible=False, mode='lines+markers', line={'dash':'dash', 'color':'black'})
 
 
@@ -348,7 +349,7 @@ app.index_string = '''
             {%config%}
             {%scripts%}
             {%renderer%}
- <!-- Default Statcounter code for Covid10
+<!-- Default Statcounter code for Covid10
 http://www.covid19intexas.com -->
 <script type="text/javascript">
 var sc_project=12224865; 
