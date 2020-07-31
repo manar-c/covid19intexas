@@ -1,4 +1,4 @@
-#Creating dashboard of covid cases
+#Creating dashboard of covid case
 
 import pandas as pd
 import plotly.express as px
@@ -270,7 +270,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                 html.Div([
                     html.Div(),
                     html.Div([html.P(html.B('Texas')),
-                              html.P('Updated: 7/29/2020'),
+                              html.P('Updated: 7/30/2020'),
                               html.P('Total: '+str(texasToday)),
                               html.P(['New: ',html.Span(str(texasNewCasesToday), style={'color':texasincrease})])], style={'textAlign':"center",
                                                        'borderRadius':'4px','border':'solid darkgrey',
@@ -279,7 +279,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                                                        'backgroundColor':'lightgrey'},
                              className=spacing),
                     html.Div([html.P(html.B('Travis County')),
-                              html.P('Updated: 7/29/2020'),
+                              html.P('Updated: 7/30/2020'),
                               html.P('Total: '+str(austinToday)),
                               html.P(['New: ',html.Span(str(austinNewCasesToday), style={'color':austinincrease})])],
                              style={'textAlign':"center",
@@ -289,7 +289,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                                                        'backgroundColor':'lightgrey'},
                              className=spacing),
                     html.Div([html.P(html.B('Dallas County')),
-                              html.P('Updated: 7/29/2020'),
+                              html.P('Updated: 7/30/2020'),
                               html.P('Total: '+str(dallasToday)),
                                html.P(['New: ',html.Span(str(dallasNewCasesToday), style={'color':dallasincrease})])],
                     
@@ -299,7 +299,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                                                        'backgroundColor':'lightgrey'},
                              className=spacing),
                     html.Div([html.P(html.B('Harris County')),
-                              html.P('Updated: 7/29/2020'),
+                              html.P('Updated: 7/30/2020'),
                               html.P('Total: '+str(harrisToday)),
                                html.P(['New: ',html.Span(str(harrisNewCasesToday), style={'color':harrisincrease})])],
                          
