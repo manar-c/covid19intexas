@@ -357,6 +357,24 @@ app.index_string = '''
             {%scripts%}
             {%renderer%}
 
+ <!-- Default Statcounter code for Covid10
+http://www.covid19intexas.com -->
+<script type="text/javascript">
+var sc_project=12224865; 
+var sc_invisible=1; 
+var sc_security="5c457a33"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics
+Made Easy - StatCounter" href="https://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/12224865/0/5c457a33/1/"
+alt="Web Analytics Made Easy -
+StatCounter"></a></div></noscript>
+<!-- End of Statcounter Code -->
+
 
     </body>
 </html>
