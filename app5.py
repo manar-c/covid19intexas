@@ -277,7 +277,7 @@ app.layout = html.Div(style={'backgroundColor':colors['background'],'textAlign':
                 html.Div([
                     html.Div(),
                     html.Div([html.P(html.B('Texas')),
-                              html.P('Updated: 9/11/2020'),
+                              html.P('Updated: 9/12/2020'),
                               html.P('Total: '+str(texasToday)),
                               html.P(['New: ',html.Span(str(texasNewCasesToday), style={'color':texasincrease})])], style={'textAlign':"center",
                                                        'borderRadius':'4px','border':'solid darkgrey',
