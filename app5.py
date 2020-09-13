@@ -38,6 +38,11 @@ def createLayout(title, xlabel, ylabel):
             showgrid=False,ticks='outside',fixedrange=True,automargin=False,
             title_standoff=200,
             constrain="domain"),
+        yaxis2=dict(
+            title='New Cases',
+            overlaying='y',
+            side='right',
+            showgrid=False, ticks='outside', fixedrange=True, automargin=True),
         xaxis=dict(linewidth=2,linecolor=colors['text'],mirror=True,showgrid=False,ticks='outside', fixedrange=True,automargin=True),
         xaxis_title=xlabel,
         autosize=True,
@@ -68,6 +73,7 @@ def layoutUpdate(fig, pattern1, pattern2, logticks):
                     ),
                 dict(
                     args=[{'visible':pattern2},
+                
                           {'yaxis':{'type':'log', 'title':'Total', 'tickvals':logticks, 'ticks':'outside', 'fixedrange':True, 'automargin':True,
                                     'linewidth':2, 'mirror':True, 'linecolor':colors['text']}}],
                           #{'yaxis':{'visible':[False,True]}}],
@@ -170,7 +176,7 @@ newdate, yt = getBestFit(austincases, [0, 6, 24, 40], [3.2, 57, 554, 1363], [0.5
 
 trace3 = go.Scatter(x = newdate, y = yt, name='Best Fit+Estimate', visible=False, mode='lines+markers', line={'dash':'dash', 'color':'black'})
 #Create trace for new cases
-trace4 = go.Bar(x = austincases['Date'][1:], y=np.diff(austincases['Cumulative Cases']), name='New Cases', visible=True)
+trace4 = go.Bar(x = austincases['Date'][1:], y=np.diff(austincases['Cumulative Cases']), yaxis='y2', name='New Cases', visible=True)
 
 austinToday, austinNewCasesToday, austinincrease = getSummary(austincases['Cumulative Cases'])
 
@@ -186,7 +192,7 @@ trace1 = go.Scatter(x=dallascases['Date'], y=dallascases['Count'], name="Linear"
 trace2 = go.Scatter(x=dallascases['Date'], y=dallascases['Count'], name="Logarithmic",mode = 'lines+markers', visible=False)
 #trace2 = go.Scatter(x=dallascases['Date'], y=dallascases['Count'], yaxis='y2', name="Logarithmic",mode = 'lines+markers')
 #Create trace for new cases
-trace3 = go.Bar(x = dallascases['Date'][1:], y=np.diff(dallascases['Count']), name='New Cases', visible=True)
+trace3 = go.Bar(x = dallascases['Date'][1:], y=np.diff(dallascases['Count']), yaxis='y2', name='New Cases', visible=True)
 
 newdate, yt = getBestFit(dallascases, [0, 16, 25, 50], [4, 290, 1050, 3700], [0.27, 0.125, 0.05, 0.03])
 trace4 = go.Scatter(x = newdate, y = yt, name='Best Fit+Estimate', visible=False, mode='lines+markers', line={'dash':'dash', 'color':'black'})
@@ -202,7 +208,7 @@ fig2d = layoutUpdate(fig2d, [True, False, True, False], [False, True, False, Tru
 ###############HARRIS
 trace1 = go.Scatter(x=houstoncases['Date'], y=houstoncases['Count'], name="Linear", mode = 'lines+markers')
 trace2 = go.Scatter(x=houstoncases['Date'], y=houstoncases['Count'], name="Logarithmic",mode = 'lines+markers', visible=False)
-trace3 = go.Bar(x = houstoncases['Date'][1:], y=np.diff(houstoncases['Count']), name='New Cases', visible=True)
+trace3 = go.Bar(x = houstoncases['Date'][1:], y=np.diff(houstoncases['Count']), yaxis='y2',name='New Cases', visible=True)
 
 newdate, yt = getBestFit(houstoncases, [0, 35, 50], [3, 3127, 5482], [0.2, 0.041, 0.028])
 trace4 = go.Scatter(x = newdate, y = yt, name='Best Fit+Estimate', visible=False, mode='lines+markers', line={'dash':'dash', 'color':'black'})
@@ -220,25 +226,26 @@ fig2h = layoutUpdate(fig2h, [True, False, True, False], [False, True, False, Tru
 #Plot texas numbers
 x = texascases.iloc[:,0]
 y = texascases.iloc[:,1] #Point1Acre
-y1 = texascases.iloc[:,2] #Not using, USA Today
-y2 = texascases.iloc[:,3] #JHU
+#y1 = texascases.iloc[:,2] #Not using, USA Today
+#Commented jhu out on 9/12/20
+#y2 = texascases.iloc[:,3] #JHU
 
 texasToday, texasNewCasesToday, texasincrease = getSummary(y)
-trace1 = go.Scatter(x=x, y=y, name="Point1-Linear",mode = 'lines+markers')
-trace1A = go.Scatter(x = x, y = y2, name="JHU-Linear", mode='lines+markers')
+trace1 = go.Scatter(x=x, y=y, name="Linear",mode = 'lines+markers')
+#trace1A = go.Scatter(x = x, y = y2, name="JHU-Linear", mode='lines+markers')
 #trace2 = go.Scatter(x=x, y=(y2+y)*0.5, name="Average-Logarithmic",mode = 'lines+markers', visible=False)
 trace2 = go.Scatter(x=x, y=(2*y)*0.5, name="Average-Logarithmic",mode = 'lines+markers', visible=False)
 
-trace4 = go.Bar(x = x[1:], y=np.diff(y), name='New Cases', visible=True)
+trace4 = go.Bar(x = x[1:], y=np.diff(y), yaxis='y2',name='New Cases', visible=True)
 newdate, yt = getBestFit(texascases[3:], [0, 24, 37, 43], [4.57, 2900, 12400, 18000], [0.27, 0.115, 0.0535, 0.03])
 trace3 = go.Scatter(x = newdate, y = yt, name='Best Fit+Estimate', visible=False, mode='lines+markers', line={'dash':'dash', 'color':'black'})
 
 
-data_texas = [trace1, trace1A, trace2, trace3, trace4]
+data_texas = [trace1, trace2, trace3, trace4]
 layout_texas = createLayout('Total Cases in Texas', 'Date', 'Total')
 fig3=go.Figure(data_texas, layout=layout_texas)
 #fig3.update_yaxes(tick0=20)
-fig3 = layoutUpdate(fig3, [True, True, False, False, True], [False, False, True, True, False], [0, 10, 100, 1000, 10000])
+fig3 = layoutUpdate(fig3, [True, False, False, True], [False, True, True, False], [0, 10, 100, 1000, 10000])
 
 
 
@@ -350,27 +357,7 @@ app.index_string = '''
             {%scripts%}
             {%renderer%}
 
-<!-- Default Statcounter code for Covid10
-http://www.covid19intexas.com -->
-<script type="text/javascript">
-var sc_project=12224865; 
-var sc_invisible=1; 
-var sc_security="5c457a33"; 
-</script>
-<script type="text/javascript"
-src="https://secure.statcounter.com/counter/counter.js"
-async></script>
 
-<script type="text/javascript"
-src="https://secure.statcounter.com/counter/counter.js"
-async></script>
-<noscript><div class="statcounter"><a title="Web Analytics
-Made Easy - StatCounter" href="https://statcounter.com/"
-target="_blank"><img class="statcounter"
-src="https://c.statcounter.com/12224865/0/5c457a33/1/"
-alt="Web Analytics Made Easy -
-StatCounter"></a></div></noscript>
-<!-- End of Statcounter Code -->
     </body>
 </html>
 '''
